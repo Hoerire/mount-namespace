@@ -1,4 +1,4 @@
-# 自由启停 / GuardianShield
+# 隐域 / Mount Namespace
 
 <p align="center">
   <strong>Android 16 Mount Namespace 存储隔离框架</strong><br>
