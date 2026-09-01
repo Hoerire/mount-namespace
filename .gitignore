@@ -1,0 +1,49 @@
+# Gradle
+.gradle/
+build/
+app/build/
+local.properties
+
+# Native build artifacts
+native/*.o
+native/guard
+native/guard_storage
+native/logd
+native/logd_arm64-v8a
+
+# Keystore (do not commit)
+*.keystore
+*.jks
+
+# APK files
+*.apk
+*.ap_
+*.dex
+*.idsig
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Decompilation artifacts
+guard_decompiled.c
+
+# Experimental/old C files (kept in native/ only)
+main.c
+mount_android_data.c
+mount_simple.c
+namespace.c
+Makefile_storage
+guard
+guard_storage
+
+# Root-level duplicates (canonical copies in native/)
+/guard_src.c
+/guard.h
+/guard_storage.c
+/Makefile
