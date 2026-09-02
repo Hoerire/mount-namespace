@@ -1,0 +1,20 @@
+# Gradle build artifacts
+.gradle/
+build/
+app/build/
+
+# Native build artifacts
+native/*.o
+
+# Compiled native binaries (can be rebuilt from source)
+/guard
+/guard_storage
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,44 @@
+# Makefile for logd_storage.c
+# Target: Android ARM64 (arm64-v8a)
+# Requires: Android NDK r26+
+
+# NDK 路径 (可通过环境变量覆盖)
+NDK_PATH ?= /data/user/work/android-sdk/ndk/26.3.11579264
+TOOLCHAIN = $(NDK_PATH)/toolchains/llvm/prebuilt/linux-x86_64
+
+# 编译器
+CC = $(TOOLCHAIN)/bin/aarch64-linux-android21-clang
+
+# 编译选项
+# -O2: 优化级别
+# -s: 去除符号表 (减小体积)
+# -Wall -Wextra: 警告
+# -D_GNU_SOURCE: 启用 GNU 扩展 (unshare, mount 等)
+CFLAGS = -O2 -s -Wall -Wextra -D_GNU_SOURCE
+
+# 链接选项 (无第三方库)
+LDFLAGS =
+
+# 目标
+TARGET = logd_storage
+
+.PHONY: all clean install test
+
+all: $(TARGET)
+
+$(TARGET): logd_storage.c
+	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+	@echo "Built: $(TARGET)"
+	@file $(TARGET)
+
+# 安装到设备 (需要 adb)
+install: $(TARGET)
+	adb push $(TARGET) /data/local/tmp/
+	adb shell "chmod 755 /data/local/tmp/$(TARGET)"
+
+# 在设备上运行测试
+test: install
+	adb shell "su -c '/data/local/tmp/$(TARGET) --idle'"
+
+clean:
+	rm -f $(TARGET)
